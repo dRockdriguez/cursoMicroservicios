@@ -1,0 +1,5 @@
+package com.cursomicroservicios.springboot.app.productos.models.entity;
+
+public class Producto {
+
+}

@@ -1,0 +1,16 @@
+package com.cursomicroservicios.springboot.app.productos.controllers;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.cursomicroservicios.springboot.app.productos.models.service.IProductoService;
+
+@RestController
+public class ProductoController {
+	private final IProductoService productoService;
+
+	@Autowired
+	public ProductoController(final IProductoService productoService) {
+		this.productoService = productoService;
+	}
+}

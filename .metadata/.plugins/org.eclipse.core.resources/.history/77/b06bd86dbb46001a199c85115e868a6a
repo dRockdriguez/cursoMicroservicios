@@ -1,0 +1,28 @@
+package com.cursomicroservicios.springboot.app.productos.controllers;
+
+import java.util.HashMap;
+import java.util.stream.Collectors;
+
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import com.cursomicroservicios.springboot.app.productos.exceptions.ProductoNoExistenteException;
+
+@RestControllerAdvice
+public class ExceptionsHandler {
+	@ExceptionHandler(value = ProductoNoExistenteException.class)
+	public ResponseEntity<String> exception(ProductoNoExistenteException exception) {
+		HashMap<String, String> resp = new HashMap<>();
+		resp.put("message", exception.getMessage());
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.set("Baeldung-Example-Header", "Value-ResponseEntityBuilderWithHttpHeaders");
+
+		return new ResponseEntity<>(
+				resp.keySet().stream().map(key -> key + ":" + resp.get(key)).collect(Collectors.joining(",", "{", "}")),
+				responseHeaders,
+				HttpStatus.NOT_FOUND);
+	}
+}

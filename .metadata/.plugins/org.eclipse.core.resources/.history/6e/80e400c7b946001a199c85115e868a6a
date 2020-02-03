@@ -1,0 +1,14 @@
+package com.cursomicroservicios.springboot.app.productos.controllers;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+
+import com.cursomicroservicios.springboot.app.productos.exceptions.ProductoNoExistenteException;
+
+public class ExceptionsHandler {
+	@ExceptionHandler(value = ProductoNoExistenteException.class)
+	public ResponseEntity<String> exception(ProductoNoExistenteException exception) {
+		ResponseEntity<String> resp = new ResponseEntity<>("", HttpStatus.NOT_FOUND);
+	}
+}

@@ -1,0 +1,32 @@
+package com.cursomicroservicios.springboot.app.productos.controllers;
+
+import java.util.List;
+
+import javax.websocket.server.PathParam;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.cursomicroservicios.springboot.app.productos.models.entity.Producto;
+import com.cursomicroservicios.springboot.app.productos.models.service.IProductoService;
+
+@RestController
+public class ProductoController {
+	private final IProductoService productoService;
+
+	@Autowired
+	public ProductoController(final IProductoService productoService) {
+		this.productoService = productoService;
+	}
+	
+	@GetMapping("/findAll")
+	public List<Producto> findAll() {
+		return this.productoService.findAll();
+	}
+	
+	@GetMapping("/findById/{id}")
+	public Producto findById(@PathParam(value = "id") Long id) {
+		return this.productoService.findById(id);
+	}
+}

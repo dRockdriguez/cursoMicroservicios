@@ -1,0 +1,10 @@
+package com.cursomicroservicios.springboot.app.productos.exceptions;
+
+public class ProductoNoExistenteException extends RuntimeException{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7717059395069620811L;
+
+}

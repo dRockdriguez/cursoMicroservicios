@@ -1,0 +1,11 @@
+package com.cursomicroservicios.springboot.app.productos.models.repository;
+
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+
+import com.cursomicroservicios.springboot.app.productos.models.entity.Producto;
+
+@Repository
+public interface ProductoRepository extends CrudRepository<Producto, Long> {
+
+}

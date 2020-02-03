@@ -1,0 +1,18 @@
+package com.cursomicroservicios.springboot.app.productos.controllers;
+
+import java.util.HashMap;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+
+import com.cursomicroservicios.springboot.app.productos.exceptions.ProductoNoExistenteException;
+
+public class ExceptionsHandler {
+	@ExceptionHandler(value = ProductoNoExistenteException.class)
+	public ResponseEntity<String> exception(ProductoNoExistenteException exception) {
+		HashMap<String, String> resp = new HashMap<>();
+		resp.put("message", exception.getMessage());
+		return new ResponseEntity<>("", HttpStatus.NOT_FOUND);
+	}
+}
