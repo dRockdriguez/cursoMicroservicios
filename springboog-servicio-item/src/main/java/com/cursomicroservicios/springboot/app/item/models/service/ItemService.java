@@ -13,7 +13,7 @@ import org.springframework.web.client.RestTemplate;
 import com.cursomicroservicios.springboot.app.item.models.Item;
 import com.cursomicroservicios.springboot.app.item.models.Producto;
 
-@Service
+@Service("serviceRestTemplate")
 public class ItemService implements IItemService {
 
 	private final RestTemplate restTemplate;
@@ -26,7 +26,7 @@ public class ItemService implements IItemService {
 	@Override
 	public List<Item> findAll() {
 		StringBuilder url = new StringBuilder();
-		url.append("http://localhost:9090/findAll");
+		url.append("http://servicio-productos/findAll");
 
 		List<Producto> productos = Arrays.asList(restTemplate.getForObject(url.toString(), Producto[].class));
 		return productos.stream().map(p -> new Item(p, 1)).collect(Collectors.toList());
@@ -35,7 +35,7 @@ public class ItemService implements IItemService {
 	@Override
 	public Item findById(Long id, Integer cantidad) {
 		StringBuilder url = new StringBuilder();
-		url.append("http://localhost:9090/findById/{id}");
+		url.append("http://servicio-productos/findById/{id}");
 
 		Map<String, String> pathVariables = new HashMap<>();
 		pathVariables.put("id", id.toString());
