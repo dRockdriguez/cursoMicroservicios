@@ -1,10 +1,13 @@
 package com.cursomicroservicios.springboot.app.item.controllers;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +24,9 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 public class ItemController {
 	private final IItemService itemService;
 
+	@Value("${configuracion.env}")
+	private String env;
+
 	@Autowired
 	public ItemController(final @Qualifier("serviceFeign") IItemService itemService) {
 		this.itemService = itemService;
@@ -32,7 +38,7 @@ public class ItemController {
 	}
 
 	@HystrixCommand(fallbackMethod = "alternativeMethod")
-	@GetMapping(value = "findById/{id}/cantidad/{cantidad}")
+	@GetMapping(value = "/findById/{id}/cantidad/{cantidad}")
 	public ResponseEntity<Item> findById(@PathVariable(value = "id") Long id,
 			@PathVariable(value = "cantidad") Integer cantidad) {
 		return new ResponseEntity<>(this.itemService.findById(id, cantidad), HttpStatus.OK);
@@ -41,5 +47,12 @@ public class ItemController {
 	public ResponseEntity<Item> alternativeMethod(Long id, Integer cantidad) {
 		Producto p = new Producto(id, "prod no existente", 0d, new Date());
 		return new ResponseEntity<>(new Item(p, cantidad), HttpStatus.OK);
+	}
+
+	@GetMapping(value = "/pruebaconfig")
+	public ResponseEntity<?> pruebaconfig() {
+		Map<String, String> resp = new HashMap<String, String>();
+		resp.put("env", env);
+		return new ResponseEntity<Map<String, String>>(resp, HttpStatus.OK);
 	}
 }
