@@ -25,9 +25,6 @@ public class Producto implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date creadoEn;
 
-	@Transient
-	private Integer port;
-
 	/**
 	 * 
 	 */
@@ -65,11 +62,4 @@ public class Producto implements Serializable {
 		this.creadoEn = creadoEn;
 	}
 
-	public Integer getPort() {
-		return port;
-	}
-
-	public void setPort(Integer port) {
-		this.port = port;
-	}
 }

@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cursomicroservicios.springboot.app.item.models.Item;
-import com.cursomicroservicios.springboot.app.item.models.service.ItemService;
+import com.cursomicroservicios.springboot.app.item.models.service.IItemService;
 
 @RestController
 public class ItemController {
-	private final ItemService itemService;
+	private final IItemService itemService;
 
 	@Autowired
-	public ItemController(final @Qualifier("serviceFeign") ItemService itemService) {
+	public ItemController(final @Qualifier("serviceFeign") IItemService itemService) {
 		this.itemService = itemService;
 	}
 

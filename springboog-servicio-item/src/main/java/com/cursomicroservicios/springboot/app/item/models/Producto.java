@@ -7,19 +7,17 @@ public class Producto {
 	private String nombre;
 	private Double precio;
 	private Date creadoEn;
-	private Integer port;
 
 	public Producto() {
 
 	}
 
-	public Producto(final Long id, final String nombre, final Double precio, final Date creadoEn, final Integer port) {
+	public Producto(final Long id, final String nombre, final Double precio, final Date creadoEn) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.precio = precio;
 		this.creadoEn = creadoEn;
-		this.port = port;
 	}
 
 	public Long getId() {
@@ -36,10 +34,6 @@ public class Producto {
 
 	public Date getCreadoEn() {
 		return creadoEn;
-	}
-
-	public Integer getPort() {
-		return port;
 	}
 
 }

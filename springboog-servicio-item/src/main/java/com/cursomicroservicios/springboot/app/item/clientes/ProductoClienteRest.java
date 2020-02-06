@@ -10,10 +10,10 @@ import com.cursomicroservicios.springboot.app.item.models.Producto;
 
 @FeignClient(name = "servicio-productos")
 public interface ProductoClienteRest {
-	@GetMapping("/findAll")
+	@GetMapping("/findAllProducto")
 	List<Producto> findAll();
 
-	@GetMapping("findById/{id}")
+	@GetMapping("findByIdProducto/{id}")
 	Producto findById(@PathVariable(value = "id") Long id);
 
 }

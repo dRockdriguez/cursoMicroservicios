@@ -7,13 +7,15 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.cursomicroservicios.springboot.app.item.models.Item;
 import com.cursomicroservicios.springboot.app.item.models.Producto;
 
-@Service("serviceRestTemplate")
+@Service
+@Qualifier(value = "serviceRestTemplate")
 public class ItemService implements IItemService {
 
 	private final RestTemplate restTemplate;

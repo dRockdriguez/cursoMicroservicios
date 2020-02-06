@@ -27,7 +27,7 @@ public class ProductoController {
 		this.productoService = productoService;
 	}
 
-	@GetMapping(value = "/findAll", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/findAllProducto", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Producto>> findAll() {
 		return new ResponseEntity<>(this.productoService.findAll().stream().map(prod -> {
 			prod.setPort(port);
@@ -36,7 +36,7 @@ public class ProductoController {
 
 	}
 
-	@GetMapping(value = "/findById/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/findByIdProducto/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Producto> findById(@PathVariable(value = "id") Long id) {
 		Producto prod = this.productoService.findById(id);
 		prod.setPort(port);
