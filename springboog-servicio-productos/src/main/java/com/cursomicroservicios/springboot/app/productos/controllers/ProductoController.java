@@ -19,7 +19,7 @@ import com.cursomicroservicios.springboot.app.productos.models.service.IProducto
 public class ProductoController {
 	@Value("${server.port}")
 	private Integer port;
-	
+
 	private final IProductoService productoService;
 
 	@Autowired
@@ -29,17 +29,13 @@ public class ProductoController {
 
 	@GetMapping(value = "/findAllProducto", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Producto>> findAll() {
-		return new ResponseEntity<>(this.productoService.findAll().stream().map(prod -> {
-			prod.setPort(port);
-			return prod;
-		}).collect(Collectors.toList()), HttpStatus.OK);
+		return new ResponseEntity<>(this.productoService.findAll().stream().collect(Collectors.toList()),
+				HttpStatus.OK);
 
 	}
 
 	@GetMapping(value = "/findByIdProducto/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Producto> findById(@PathVariable(value = "id") Long id) {
-		Producto prod = this.productoService.findById(id);
-		prod.setPort(port);
-		return new ResponseEntity<>(prod, HttpStatus.OK);
+		return new ResponseEntity<>(this.productoService.findById(id), HttpStatus.OK);
 	}
 }
