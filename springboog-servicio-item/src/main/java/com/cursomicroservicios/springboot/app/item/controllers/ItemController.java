@@ -1,5 +1,6 @@
 package com.cursomicroservicios.springboot.app.item.controllers;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cursomicroservicios.springboot.app.item.models.Item;
+import com.cursomicroservicios.springboot.app.item.models.Producto;
 import com.cursomicroservicios.springboot.app.item.models.service.IItemService;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
 @RestController
 public class ItemController {
@@ -28,9 +31,15 @@ public class ItemController {
 		return new ResponseEntity<>(this.itemService.findAll(), HttpStatus.OK);
 	}
 
+	@HystrixCommand(fallbackMethod = "alternativeMethod")
 	@GetMapping(value = "findById/{id}/cantidad/{cantidad}")
 	public ResponseEntity<Item> findById(@PathVariable(value = "id") Long id,
 			@PathVariable(value = "cantidad") Integer cantidad) {
 		return new ResponseEntity<>(this.itemService.findById(id, cantidad), HttpStatus.OK);
+	}
+
+	public ResponseEntity<Item> alternativeMethod(Long id, Integer cantidad) {
+		Producto p = new Producto(id, "prod no existente", 0d, new Date());
+		return new ResponseEntity<>(new Item(p, cantidad), HttpStatus.OK);
 	}
 }

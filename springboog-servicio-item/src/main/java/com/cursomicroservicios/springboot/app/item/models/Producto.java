@@ -13,7 +13,6 @@ public class Producto {
 	}
 
 	public Producto(final Long id, final String nombre, final Double precio, final Date creadoEn) {
-		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.precio = precio;
