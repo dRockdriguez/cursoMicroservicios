@@ -32,6 +32,13 @@ public class ItemController {
 		this.itemService = itemService;
 	}
 
+	@GetMapping(value = "/pruebaconfig")
+	public ResponseEntity<?> pruebaconfig() {
+		Map<String, String> resp = new HashMap<String, String>();
+		resp.put("env", env);
+		return new ResponseEntity<Map<String, String>>(resp, HttpStatus.OK);
+	}
+
 	@GetMapping(value = "/findAll", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Item>> findAll() {
 		return new ResponseEntity<>(this.itemService.findAll(), HttpStatus.OK);
@@ -49,10 +56,4 @@ public class ItemController {
 		return new ResponseEntity<>(new Item(p, cantidad), HttpStatus.OK);
 	}
 
-	@GetMapping(value = "/pruebaconfig")
-	public ResponseEntity<?> pruebaconfig() {
-		Map<String, String> resp = new HashMap<String, String>();
-		resp.put("env", env);
-		return new ResponseEntity<Map<String, String>>(resp, HttpStatus.OK);
-	}
 }
