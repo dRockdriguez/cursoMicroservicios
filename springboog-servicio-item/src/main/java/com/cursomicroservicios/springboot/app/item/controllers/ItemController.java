@@ -9,12 +9,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
-import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cursomicroservicios.springboot.app.item.models.Item;
@@ -51,6 +55,22 @@ public class ItemController {
 	public ResponseEntity<Item> findById(@PathVariable(value = "id") Long id,
 			@PathVariable(value = "cantidad") Integer cantidad) {
 		return new ResponseEntity<>(this.itemService.findById(id, cantidad), HttpStatus.OK);
+	}
+
+	@PostMapping(value = "/create", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Producto> create(@RequestBody Producto producto) {
+		return new ResponseEntity<>(this.itemService.save(producto), HttpStatus.CREATED);
+	}
+
+	@PutMapping(value = "/update/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Producto> update(@RequestBody Producto producto, @PathVariable(name = "id") Long id) {
+		return new ResponseEntity<>(this.itemService.update(producto, id), HttpStatus.CREATED);
+	}
+
+	@DeleteMapping(value = "/delete/{id}")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void delete(@PathVariable(name = "id") Long id) {
+		this.itemService.delete(id);
 	}
 
 	public ResponseEntity<Item> alternativeMethod(Long id, Integer cantidad) {
