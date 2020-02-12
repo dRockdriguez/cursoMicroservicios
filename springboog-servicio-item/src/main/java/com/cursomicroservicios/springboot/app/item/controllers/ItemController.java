@@ -26,14 +26,12 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 @RestController
 public class ItemController {
 	private final IItemService itemService;
-	private final Environment environment;
 	@Value("${configuracion.env}")
 	private String env;
 
 	@Autowired
-	public ItemController(final @Qualifier("serviceFeign") IItemService itemService,  final Environment environment) {
+	public ItemController(final @Qualifier("serviceFeign") IItemService itemService) {
 		this.itemService = itemService;
-		this.environment = environment;
 	}
 
 	@GetMapping(value = "/pruebaconfig")

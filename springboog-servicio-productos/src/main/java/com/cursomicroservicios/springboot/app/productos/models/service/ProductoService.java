@@ -1,5 +1,6 @@
 package com.cursomicroservicios.springboot.app.productos.models.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,21 @@ public class ProductoService implements IProductoService {
 	@Transactional(readOnly = true)
 	public Producto findById(Long id) {
 		return this.productoRepository.findById(id).orElseThrow(() -> new ProductoNoExistenteException(id));
+	}
+
+	@Override
+	@Transactional
+	public Producto save(Producto producto) {
+		producto.setCreadoEn(new Date());
+		return this.productoRepository.save(producto);
+	}
+
+	@Override
+	@Transactional
+	public void deleteById(Long id) {
+		this.productoRepository.findById(id).orElseThrow(() -> new ProductoNoExistenteException(id));
+		this.productoRepository.deleteById(id);
+
 	}
 
 }
