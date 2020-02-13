@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cursomicroservicios.springboot.app.productos.exceptions.ProductoNoExistenteException;
-import com.cursomicroservicios.springboot.app.productos.models.entity.Producto;
 import com.cursomicroservicios.springboot.app.productos.models.repository.ProductoRepository;
+import com.cursomicroservicios.springboot.commons.models.entity.Producto;
 
 @Service
 public class ProductoService implements IProductoService {

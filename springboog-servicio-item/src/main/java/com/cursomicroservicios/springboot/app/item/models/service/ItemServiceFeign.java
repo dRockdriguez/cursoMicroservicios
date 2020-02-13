@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.cursomicroservicios.springboot.app.item.clientes.ProductoClienteRest;
 import com.cursomicroservicios.springboot.app.item.models.Item;
-import com.cursomicroservicios.springboot.app.item.models.Producto;
+import com.cursomicroservicios.springboot.commons.models.entity.Producto;
 
 @Service
 @Qualifier(value = "serviceFeign")

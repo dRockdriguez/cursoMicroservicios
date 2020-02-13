@@ -22,8 +22,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cursomicroservicios.springboot.app.item.models.Item;
-import com.cursomicroservicios.springboot.app.item.models.Producto;
 import com.cursomicroservicios.springboot.app.item.models.service.IItemService;
+import com.cursomicroservicios.springboot.commons.models.entity.Producto;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
 @RefreshScope

@@ -3,7 +3,7 @@ package com.cursomicroservicios.springboot.app.item.models.service;
 import java.util.List;
 
 import com.cursomicroservicios.springboot.app.item.models.Item;
-import com.cursomicroservicios.springboot.app.item.models.Producto;
+import com.cursomicroservicios.springboot.commons.models.entity.Producto;
 
 public interface IItemService {
 	List<Item> findAll();
