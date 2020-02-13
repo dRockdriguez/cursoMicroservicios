@@ -29,8 +29,11 @@ public class Producto implements Serializable {
 	 */
 	private static final long serialVersionUID = 3647686122259386853L;
 
+	public Producto() {
+
+	}
+
 	public Producto(Long id, String nombre, Double precio, Date creadoEn) {
-		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.precio = precio;
